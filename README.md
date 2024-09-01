@@ -2,7 +2,10 @@
 ## References
 1. MUELLER, Jonas et THYAGARAJAN, Aditya. Siamese recurrent architectures for learning sentence similarity. In : Proceedings of the AAAI conference on artificial intelligence. 2016.
 
-## 1. Données (Quora Dataset)
+## 1. Introduction
+Dans cet exercice, un réseau siamois dans une tâche de "text-similarity" sur la dataset Quora est exploré.L'objectif est de trouver si deux question présente une duplication ou pas. L'architecture de base proposée est un siamois à base de LSTM et la distance Manhatten inspiré de l'étude menée par [1]. Dans cette étude, le modèle siamois de base est entrainé sur la tache de similarité entre des pairs de questions du dataset Quora. Ensuite, l'impact de l'ajout du méchanisme d'attention (avant et après la couche LSTM) est étudié sur les performances du réseau à trouver des similarité des questions. En fin, les couches d'embedding sont remplacé par des embedding du modèle Bert, et une étude sur l'impact de l'ajout de cet LLM sur les performances est menée.
+
+## 2. Données (Quora Dataset)
 Le dataset Quora Question Pairs est une collection de données provenant de la plateforme de questions-réponses Quora. Ce dataset est couramment utilisé pour les tâches de classification de similarité de texte et est particulièrement intéressant pour les modèles de réseaux siamois (siamese networks).
 Colonnes Principales:
 - id: Identifiant unique de la paire de questions.
@@ -16,8 +19,7 @@ Ce dataset est adéquoit pour explorer des résaux siamois, il est constitué de
 
 Lien du dataset : https://www.kaggle.com/competitions/quora-question-pairs/data
 
-## 2. Introduction
-Dans cet exercice, réseau siamois dans une tâche de "text-similarity" sur la dataset Quora est exploré. L'architecture de base proposée est un siamois à base de LSTM et la distance Manhatten inspiré de l'étude menée par [1]. Dans cette étude, le modèle siamois de base est entrainé sur la tache de similarité entre des pairs de questions du dataset Quora. Ensuite, l'impact de l'ajout du méchanisme d'attention (avant et après la couche LSTM) est étudié sur les performances du réseau à trouver des similarité des questions. En fin, les couches d'embedding sont remplacé par des embedding du modèle Bert, et une étude sur l'impact de l'ajout de cet LLM sur les performances est menée.
+
 
 
 ## 3. Siamese LSTM
