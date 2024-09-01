@@ -20,17 +20,16 @@ Le réseau siamois de base est constitué de LSTM (Long Short-Term Memory) pour 
 
 ## 3. Attention + Siamese LSTM
 Un mechanisme de self attention est ajouté après(ou avant) la couche LSTM. Les courbes suivantes montre une comparaison entre les performances en accuracy du moèle avec couche d'attention (avant et après LSTM) et sans attention.
+<p align="center">
+  <img src="images/history-beforeattenvslstm-graph.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 2: Accuracy pour les modèles avec attention avant LSTM et sans attention</em></p>
 
-<div style="display: flex; justify-content: space-around;">
-  <figure>
-    <img src="images/history-beforeattenvslstm-graph.png" style="width:45%;">
-    <figcaption>Accuracy pour les modèles avec attention avant LSTM et sans attention</figcaption>
-  </figure>
-  <figure>
-    <img src="images/history-attenvslstm-graph.png"  style="width:45%;">
-    <figcaption>Accuracy pour les modèles avec attention après LSTM et sans attention</figcaption>
-  </figure>
-</div>
+<p align="center">
+  <img src="images/history-attenvslstm-graph.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 2: Accuracy pour les modèles avec attention avant LSTM et sans attention</em></p>
+
 
 La couche d'attention placée après la couche LSTM, augmente les performances en accuracy d'entrainement de manière significative. Le modèle apprend plus vite les similarités entre pair. L'accuracy de validation est un meilleur d'un degrée moins significatif que dans l'entrainement. 
 Pour expliquer le résultat obtenu, il est constaté que la LSTM a déjà capturé l'information de toute la séquence, y compris les dépendances à long terme. L'attention peut donc se baser sur des représentations plus riches pour choisir les parties importantes.
