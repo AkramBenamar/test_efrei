@@ -70,7 +70,12 @@ Cependant, certains données de test, les attentions sont plus importantes pour 
 </p>
 <p align="center"><em>Figure 6: Poids d'attention d'une sequence de test </em></p>
 
-Ceci montre les limites de notre mécanisme d'attention. Une attention multi head pourrait palier à ce problème.
+Ceci montre les limites de notre mécanisme d'attention. Une proposition d'une LSTM Biderectionnelle pourrait palier à ce problème. En effet, la visualisation de la même phrase precédente avec une LSTM Bidirectionnelle montre une meilleure répartition de l'attention sur l'enssemble des mots de la séquence:
+<p align="center">
+  <img src="images/hmr18bi.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 7: Poids d'attention d'une sequence de test (LSTM Bidirectionnelle)</em></p>
+
 
 ## 5. Bert
 Dans cette partie, la partie embeddings est remplacé par un BERT pré-entrainé. Pour des raisons de ressources de calcul, cette solution est présente sous forme d'un notebook.
@@ -80,7 +85,7 @@ Pour cela, un echantillon du dataset est pris pour entrainer le modèle. Dans ce
 <p align="center">
   <img src="images/BertPerf.png" alt="" width="500">
 </p>
-<p align="center"><em>Figure 7: accuracy d'entrainement et de validation de Bert-siamese</em></p>
+<p align="center"><em>Figure 8: accuracy d'entrainement et de validation de Bert-siamese</em></p>
 
 En conclusion, malgré la richesse du modèle Bert, il peut ne pas réussir dans certaines tâches spécifiques. Le manque de ressources est aussi un point pénalisant.
 
