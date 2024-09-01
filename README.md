@@ -54,16 +54,23 @@ La couche d'attention placée avant la couche LSTM n'améliore pas les performan
 
 Les poids d'attention peuvent être visualisé dans les figures suivantes. La valeur à la position (𝑖,𝑗) dans la matrice d'attention représente l'importance que la position 𝑖 de la séquence accorde à la position 𝑗 de la séquence. 
 <p align="center">
-  <img src="images/hml.png" alt="Siamese LSTM Architecture" width="500">
+  <img src="images/hml8.png" alt="Siamese LSTM Architecture" width="500">
 </p>
-<p align="center"><em>Figure 4: Poids d'attention d'une sequence de test (pair gauche)</em></p>
+<p align="center"><em>Figure 4: Poids d'attention d'une sequence de test </em></p>
 
 <p align="center">
-  <img src="images/hmr.png" alt="Siamese LSTM Architecture" width="500">
+  <img src="images/hmr15.png" alt="Siamese LSTM Architecture" width="500">
 </p>
-<p align="center"><em>Figure 4: Poids d'attention d'une sequence de test (pair droite)</em></p>
+<p align="center"><em>Figure 5: Poids d'attention d'une sequence de test </em></p>
 
-Cela peut indiquer que les éléments vers la fin de la séquence contiennent des informations cruciales pour le modèle, et ces éléments sont importants pour les positions plus tôt dans la séquence. Ceci peut être expliqué par la nature des données traité (questions), la fin de la phrase contient des éléments importants pour la compréhension sémantique.
+Le modèle arrive à apprendre à donner de l'attention entre chaque mot de la séquence et le reste des mots.
+Cependant, certains données de test, les attentions sont plus importantes pour les mots vers la fin de séquences comme le montre les figures suivantes :
+<p align="center">
+  <img src="images/hmr18.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 6: Poids d'attention d'une sequence de test </em></p>
+
+Ceci montre les limites de notre mécanisme d'attention. Une attention multi head pourrait palier à ce problème.
 
 ## 5. Bert
 Dans cette partie, la partie embeddings est remplacé par un BERT pré-entrainé. Pour des raisons de ressources de calcul, cette solution est présente sous forme d'un notebook.
@@ -73,7 +80,7 @@ Pour cela, un echantillon du dataset est pris pour entrainer le modèle. Dans ce
 <p align="center">
   <img src="images/BertPerf.png" alt="" width="500">
 </p>
-<p align="center"><em>Figure 5: accuracy d'entrainement et de validation de Bert-siamese</em></p>
+<p align="center"><em>Figure 7: accuracy d'entrainement et de validation de Bert-siamese</em></p>
 
 En conclusion, malgré la richesse du modèle Bert, il peut ne pas réussir dans certaines tâches spécifiques. Le manque de ressources est aussi un point pénalisant.
 
