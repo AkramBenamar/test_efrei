@@ -23,11 +23,11 @@ Un mechanisme de self attention est ajouté après(ou avant) la couche LSTM. Les
 
 <div style="display: flex; justify-content: space-around;">
   <figure>
-    <img src="images/history-beforeattenvslstm-graph.png" style="width:45%;" align="center">
+    <img src="images/history-beforeattenvslstm-graph.png" style="width:45%;">
     <figcaption>Accuracy pour les modèles avec attention avant LSTM et sans attention</figcaption>
   </figure>
   <figure>
-    <img src="images/history-attenvslstm-graph.png"  style="width:45%; " align="center">
+    <img src="images/history-attenvslstm-graph.png"  style="width:45%;">
     <figcaption>Accuracy pour les modèles avec attention après LSTM et sans attention</figcaption>
   </figure>
 </div>
