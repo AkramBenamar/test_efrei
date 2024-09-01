@@ -2,7 +2,7 @@ import tensorflow as tf
 from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Embedding, LSTM, Input, Lambda
 from tensorflow.keras import backend as K
-
+from utils import ManDist
 class SiameseLSTM:
     def __init__(self, embeddings, embedding_dim=300, max_seq_length=20):
         self.embeddings = embeddings
@@ -29,11 +29,13 @@ class SiameseLSTM:
         right_output = shared_lstm(right_embedding)
 
         # Manhattan Distance Layer
-        def manhattan_distance(x):
-            return K.sum(K.abs(x[0] - x[1]), axis=1, keepdims=True)
+        # def manhattan_distance(x):
+        #     return K.sum(K.abs(x[0] - x[1]), axis=1, keepdims=True)
 
-        distance = Lambda(manhattan_distance)([left_output, right_output])
+        # distance = Lambda(manhattan_distance)([left_output, right_output])
+        malstm_distance = ManDist()([left_output, right_output])
 
-        model = Model(inputs=[left_input, right_input], outputs=distance)
-        model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
+
+        model = Model(inputs=[left_input, right_input], outputs=[malstm_distance])
+        model.compile(loss='mean_squared_error', optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
         return model

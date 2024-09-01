@@ -68,16 +68,10 @@ def main(args):
 
     # Evaluate model
     evaluation_results = model.evaluate([X_test['left'], X_test['right']], Y_test, verbose=1)
+    with open(f'checkpoints/training_history_{args.model}.json', 'a') as f:
+        f.write(f'\nTest Loss: {evaluation_results[0]} Test accuracy :{evaluation_results[1]}\n')
     print(f"Test Loss: {evaluation_results[0]}, Test Accuracy: {evaluation_results[1]}")
 
 if __name__ == "__main__":
     args = parse_args()
-    # data_directory = 'C:/Users/DELL/Desktop/Akm/test_technique_efrei/CompAIre/data'
-  
-    # train_csv='/content/drive/MyDrive/dataset_efrei_test/questions.csv'
-    # max_seq_length = 20
-    # sample_size = 10000
-    # n_epoch = 50
-    # batch_size = 2048
-
     main(args)

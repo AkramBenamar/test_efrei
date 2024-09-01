@@ -5,7 +5,7 @@ from tensorflow.keras import backend as K
 
 import tensorflow as tf
 import numpy as np
-
+from utils import ManDist
 
 class SelfAttention(Layer):
     def __init__(self, units, **kwargs):
@@ -41,6 +41,7 @@ class SelfAttention(Layer):
         context_vector = tf.matmul(attention_weights, value)
 
         return context_vector
+    
 class AttenSiameseLSTM:
     def __init__(self, embeddings, embedding_dim=300, max_seq_length=20,attention_units=64):
         self.embeddings = embeddings
@@ -49,31 +50,24 @@ class AttenSiameseLSTM:
         self.attention_units=attention_units
 
     def build_model(self):
-        # Define the model
-        left_input = Input(shape=(self.max_seq_length,), dtype='int32')
-        right_input = Input(shape=(self.max_seq_length,), dtype='int32')
+        strategy = tf.distribute.MirroredStrategy()
+        with strategy.scope():
+                left_input = Input(shape=(self.max_seq_length,), dtype='int32')
+                right_input = Input(shape=(self.max_seq_length,), dtype='int32')
 
-        shared_embedding = Embedding(input_dim=self.embeddings.shape[0], 
-                                     output_dim=self.embedding_dim,
-                                     weights=[self.embeddings], 
-                                     input_length=self.max_seq_length, 
-                                     trainable=False)
-        
-        shared_lstm = LSTM(50)
-        shared_attention=SelfAttention(self.attention_units)
-        left_embedding = shared_embedding(left_input)
-        right_embedding = shared_embedding(right_input)
-        left_lstm = shared_lstm(left_embedding)
-        right_lstm = shared_lstm(right_embedding)
-        left_output = shared_attention(left_lstm)
-        right_output = shared_attention(right_lstm)
+                # Shared LSTM model with self-attention
+                shared_model = Sequential()
+                shared_model.add(Embedding(input_dim=len(self.embeddings), output_dim=self.embedding_dim,
+                                        weights=[self.embeddings], input_length=self.max_seq_length, trainable=False))
+                shared_model.add(LSTM(50, return_sequences=True))
+                shared_model.add(SelfAttention(self.attention_units))
+                shared_model.add(tf.keras.layers.GlobalAveragePooling1D())
 
-        # Manhattan Distance Layer
-        def manhattan_distance(x):
-            return K.sum(K.abs(x[0] - x[1]), axis=1, keepdims=True)
+                # Compute the Manhattan distance between the two LSTM outputs
+                malstm_distance = ManDist()([shared_model(left_input), shared_model(right_input)])
 
-        distance = Lambda(manhattan_distance)([left_output, right_output])
+                model = Model(inputs=[left_input, right_input], outputs=[malstm_distance])
+                model.compile(loss='mean_squared_error', optimizer=tf.keras.optimizers.Adam(), metrics=['accuracy'])
 
-        model = Model(inputs=[left_input, right_input], outputs=distance)
-        model.compile(loss='mean_squared_error', optimizer='adam', metrics=['accuracy'])
-        return model
+                return model
+                    
