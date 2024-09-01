@@ -28,12 +28,25 @@ Un mechanisme de self attention est ajouté après(ou avant) la couche LSTM. Les
 <p align="center">
   <img src="images/history-attenvslstm-graph.png" alt="Siamese LSTM Architecture" width="500">
 </p>
-<p align="center"><em>Figure 2: Accuracy pour les modèles avec attention avant LSTM et sans attention</em></p>
+<p align="center"><em>Figure 3: Accuracy pour les modèles avec attention avant LSTM et sans attention</em></p>
 
 
 La couche d'attention placée après la couche LSTM, augmente les performances en accuracy d'entrainement de manière significative. Le modèle apprend plus vite les similarités entre pair. L'accuracy de validation est un meilleur d'un degrée moins significatif que dans l'entrainement. 
 Pour expliquer le résultat obtenu, il est constaté que la LSTM a déjà capturé l'information de toute la séquence, y compris les dépendances à long terme. L'attention peut donc se baser sur des représentations plus riches pour choisir les parties importantes.
 La couche d'attention placée avant la couche LSTM n'améliore pas les performances du modèle, la LSTM n'a pas encore vu la séquence complète, donc l'attention est basée uniquement sur les informations locales, ce qui provoque une perte du contexte globale.
+
+Les poids d'attention peuvent être visualisé dans les figures suivantes. La valeur à la position (𝑖,𝑗) dans la matrice d'attention représente l'importance que la position 𝑖 de la séquence accorde à la position 𝑗 de la séquence. 
+<p align="center">
+  <img src="images/hml.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 4: Poids d'attention d'une sequence de test (pair droite)</em></p>
+
+<p align="center">
+  <img src="images/hmr.png" alt="Siamese LSTM Architecture" width="500">
+</p>
+<p align="center"><em>Figure 4: Poids d'attention d'une sequence de test (pair gauche)</em></p>
+
+Cela peut indiquer que les éléments vers la fin de la séquence contiennent des informations cruciales pour le modèle, et ces éléments sont importants pour les positions plus tôt dans la séquence. Ceci peut être expliqué par la nature des données traité (questions), la fin de la phrase contient des éléments importants pour la compréhension sémantique.
 
 ## 4. Bert
 

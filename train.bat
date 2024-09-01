@@ -1,2 +1,3 @@
 python main.py --model siamese_lstm --data_directory C:/Users/DELL/Desktop/Akm/test_technique_efrei/CompAIre/data --max_seq_length 20 --sample_size 10000 --n_epoch 50 --batch_size 2048
 python main.py --model attention_siamese_lstm --data_directory C:/Users/DELL/Desktop/Akm/test_technique_efrei/CompAIre/data --max_seq_length 20 --sample_size 10000 --n_epoch 50 --batch_size 2048
+python main.py --model mhattention_siamese_lstm --data_directory C:/Users/DELL/Desktop/Akm/test_technique_efrei/CompAIre/data --max_seq_length 20 --sample_size 10000 --n_epoch 50 --batch_size 2048

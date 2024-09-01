@@ -3,13 +3,14 @@ import os
 from data.data_processing import DataPreprocessor
 from models.siamese_model import SiameseLSTM
 from models.attention_siamese_model import AttenSiameseLSTM
+from models.multihead_attention_siamese import MHAttenSiameseLSTM
 import json
 import argparse
 def parse_args():
     parser = argparse.ArgumentParser(description="Train a Siamese LSTM model on a question dataset.")
 
     # Adding arguments
-    parser.add_argument('--model', type=str, default='siamese_lstm',choices=['siamese_lstm','attention_siamese_lstm'],
+    parser.add_argument('--model', type=str, default='siamese_lstm',choices=['siamese_lstm','attention_siamese_lstm','mhattention_siamese_lstm'],
                         help="Choose a model to train.")
     parser.add_argument('--data_directory', type=str, required=True,
                         help="Directory where the data is located.")
@@ -42,6 +43,9 @@ def main(args):
         
     elif(args.model=='attention_siamese_lstm'):
         siamese_model = AttenSiameseLSTM(embeddings, embedding_dim=300, max_seq_length=args.max_seq_length)
+        model = siamese_model.build_model()
+    elif(args.model=='mhattention_siamese_lstm'):
+        siamese_model = MHAttenSiameseLSTM(embeddings, embedding_dim=300, max_seq_length=args.max_seq_length)
         model = siamese_model.build_model()
     else :
         raise ValueError("Model not implemented")
