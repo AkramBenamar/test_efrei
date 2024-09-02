@@ -1,6 +1,5 @@
 # README
-## References
-1. MUELLER, Jonas et THYAGARAJAN, Aditya. Siamese recurrent architectures for learning sentence similarity. In : Proceedings of the AAAI conference on artificial intelligence. 2016.
+
 
 ## 1. Introduction
 Dans cet exercice, un réseau siamois dans une tâche de "text-similarity" sur la dataset Quora est exploré.L'objectif est de trouver si deux question présente une duplication ou pas. L'architecture de base proposée est un siamois à base de LSTM et la distance Manhatten inspiré de l'étude menée par [1]. Dans cette étude, le modèle siamois de base est entrainé sur la tache de similarité entre des pairs de questions du dataset Quora. Ensuite, l'impact de l'ajout du méchanisme d'attention (avant et après la couche LSTM) est étudié sur les performances du réseau à trouver des similarité des questions. En fin, les couches d'embedding sont remplacé par des embedding du modèle Bert, et une étude sur l'impact de l'ajout de cet LLM sur les performances est menée.
@@ -76,6 +75,7 @@ Ceci montre les limites de notre mécanisme d'attention. Une proposition d'une L
 </p>
 <p align="center"><em>Figure 7: Poids d'attention d'une sequence de test (LSTM Bidirectionnelle)</em></p>
 
+En conclusion, l'emploi d'un mecanisme d'attention améliore légèrement les performances de test en accuracy, il est aussi constaté que l'attention appliqué après une couche de LSTM arrive à mieux se focaliser sur le contexte globale ce qui mène à améliorer les résultats d'accuracy. En fin, une couche de LST bidirectionnelle améliore les poids d'attention.
 
 ## 5. Bert
 Dans cette partie, la partie embeddings est remplacé par un BERT pré-entrainé. Pour des raisons de ressources de calcul, cette solution est présente sous forme d'un notebook.
@@ -96,4 +96,8 @@ Pour utiliser ce projet, suivez les étapes ci-dessous :
 2. Entrainer et évaluer le modèle siamois lstm : `python main.py --model siamese_lstm --data_directory path_to_data --max_seq_length 20 --sample_size 10000 --n_epoch 50 --batch_size 2048`
 3. avec attention : `python main.py --model attention_siamese_lstm --data_directory pat_to_data --max_seq_length 20 --sample_size 10000 --n_epoch 50 --batch_size 2048`
 4. avec Bert ; `voir bert_siamese.ipynb`
+
+## References
+1. MUELLER, Jonas et THYAGARAJAN, Aditya. Siamese recurrent architectures for learning sentence similarity. In : Proceedings of the AAAI conference on artificial intelligence. 2016.
+2. https://inside-machinelearning.com/bert-enfin-un-tutoriel-simple-et-rapide/ 
 

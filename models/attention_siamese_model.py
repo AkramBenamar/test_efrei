@@ -1,6 +1,6 @@
 import tensorflow as tf
 from tensorflow.keras.models import Model,Sequential
-from tensorflow.keras.layers import Embedding, LSTM, Input, Lambda, Layer, Dense
+from tensorflow.keras.layers import Embedding, LSTM, Input, Lambda, Layer, Dense,Bidirectional
 from tensorflow.keras import backend as K
 
 import tensorflow as tf
@@ -59,7 +59,7 @@ class AttenSiameseLSTM:
                 shared_model = Sequential()
                 shared_model.add(Embedding(input_dim=len(self.embeddings), output_dim=self.embedding_dim,
                                         weights=[self.embeddings], input_length=self.max_seq_length, trainable=False))
-                shared_model.add(LSTM(50, return_sequences=True))
+                shared_model.add(Bidirectional(LSTM(50, return_sequences=True)))
                 shared_model.add(SelfAttention(self.attention_units))
                 shared_model.add(tf.keras.layers.GlobalAveragePooling1D())
 

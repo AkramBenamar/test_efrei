@@ -28,11 +28,7 @@ class SiameseLSTM:
         left_output = shared_lstm(left_embedding)
         right_output = shared_lstm(right_embedding)
 
-        # Manhattan Distance Layer
-        # def manhattan_distance(x):
-        #     return K.sum(K.abs(x[0] - x[1]), axis=1, keepdims=True)
-
-        # distance = Lambda(manhattan_distance)([left_output, right_output])
+        
         malstm_distance = ManDist()([left_output, right_output])
 
 

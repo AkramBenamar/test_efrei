@@ -125,7 +125,7 @@ class DataPreprocessor:
     def load_and_process_data(self, train_csv, max_seq_length=20):
         # Load training set
         df = pd.read_csv(train_csv)
-        df=df.head(1000)
+        # df=df.head(1000)
         for q in ['question1', 'question2']:
             df[q + '_n'] = df[q]
 
