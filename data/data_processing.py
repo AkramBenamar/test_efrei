@@ -10,7 +10,10 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 from sklearn.model_selection import train_test_split
 
 nltk.download('stopwords')
-
+"""
+Sata processing class, clean embedd data with word2vec
+return : X_train, X_val, Y_train, Y_val, X_test, Y_test, embeddings
+"""
 class DataPreprocessor:
     def __init__(self, embedding_path, sample_size=10000):
         self.embedding_path = embedding_path

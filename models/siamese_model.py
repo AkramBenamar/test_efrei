@@ -3,6 +3,10 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.layers import Embedding, LSTM, Input, Lambda
 from tensorflow.keras import backend as K
 from utils import ManDist
+
+"""
+Siamese LSTM Based
+"""
 class SiameseLSTM:
     def __init__(self, embeddings, embedding_dim=300, max_seq_length=20):
         self.embeddings = embeddings

@@ -1,6 +1,8 @@
 from tensorflow.keras.layers import Layer
 import tensorflow as tf
-
+"""
+Manhatten Distance
+"""
 class ManDist(Layer):
     def __init__(self, **kwargs):
         super(ManDist, self).__init__(**kwargs)

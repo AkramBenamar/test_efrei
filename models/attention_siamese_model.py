@@ -6,7 +6,9 @@ from tensorflow.keras import backend as K
 import tensorflow as tf
 import numpy as np
 from utils import ManDist
-
+"""
+Self attention
+"""
 class SelfAttention(Layer):
     def __init__(self, units, **kwargs):
         super(SelfAttention, self).__init__(**kwargs)
@@ -42,6 +44,9 @@ class SelfAttention(Layer):
 
         return context_vector
     
+"""
+Attention based LSTM Siamese
+"""
 class AttenSiameseLSTM:
     def __init__(self, embeddings, embedding_dim=300, max_seq_length=20,attention_units=64):
         self.embeddings = embeddings
